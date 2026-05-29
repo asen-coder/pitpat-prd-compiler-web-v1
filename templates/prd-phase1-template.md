@@ -33,26 +33,55 @@
 ## 4. 需求范围
 ### 4.1 前端范围
 #### 功能需求
-- FS-001: [Frontend] [What data is displayed, what actions are available — NO UI layouts or visual specs]
+- FS-001: [Frontend] [展示哪些数据、提供哪些操作 —— 不含视觉/布局设计]
+#### 交互逻辑
+- FS-XXX: [Frontend] [关键交互流程、操作反馈、页面跳转关系 —— 描述行为，不描述视觉]
 
-### 4.2 后端范围
+### 4.2 后端范围（非前端重点，供后端/全局参考）
 #### 功能需求
-- BS-001: [Backend] [What business capability is needed — NO implementation details]
+- BS-001: [Backend] [需要的后端业务能力 —— 不含实现细节]
 
 ### 4.3 测试范围
 #### 测试关注点
-- TS-001: [Testing] [What needs to be verified from a quality perspective]
+- TS-001: [Testing] [从质量角度需要验证的点]
+
+### 4.4 文案与多语言（i18n）
+> 所有用户可见文本必须走 i18n（`$t`），新增文案需同步 en/fr/de。此处登记本需求涉及的文案与多语言要求。
+- COPY-001: [Frontend] [文案场景/位置] → "精确文案（中文，作为 i18n 源文案）" | 多语言: [是/否] | 备注: [新增 key / 复用现有 key]
+
+### 4.5 单位与本地化展示
+> 涉及距离/速度/配速/时间/日期/时区等需按用户制式或地区展示的字段。依据用户制式 `metricType`（0=公制，1=英制）。
+- UNIT-001: [Frontend] [字段] —— 公制: [展示形式] / 英制: [展示形式]
+- UNIT-XXX: [Frontend] [时间/日期/时区展示规则]
+
+### 4.6 UI 状态覆盖
+> 每个涉及数据的页面/模块需明确以下状态，避免遗漏。
+- UIS-001: [Frontend] [页面/模块] —— 空态: [...] / 加载态: [...] / 错误态或缺省页: [...] / 未登录或无权限态: [...]
+
+### 4.7 端能力与兼容
+> 原生能力依赖、平台差异、App 版本兼容。
+- CAP-001: [Frontend] 原生能力依赖（JSBridge）: [NFC / 蓝牙 / 3D / 跳转系统设置 / ...]
+- CAP-XXX: [Frontend] 平台差异（iOS / Android）: [差异点]
+- CAP-XXX: [Frontend] App 版本兼容: [新老版本表现、降级策略]
+
+### 4.8 涉及页面与路由清单
+> 本需求新增/改动的页面、弹窗，便于前端定位 `src/views` 与 `src/router` 范围。
+- PAGE-001: [Frontend] [页面/弹窗名] —— [新增/改动] —— [对应路由或入口（如已知）]
+
+### 4.9 埋点与数据采集
+> 前端需要上报的埋点事件与参数。
+- TRACK-001: [Frontend] [事件名/场景] —— 触发时机: [...] —— 参数: [...]
 
 ## 5. 业务流程
 [Mermaid flowchart — functional flow between actors and systems, NOT UI interaction flow]
 
 ## 6. 领域模型
-### 6.1 领域对象
-- DO-001: [ObjectName] — [Business description of key attributes and relationships]
+### 6.1 领域对象（非前端重点；前端只需关注展示字段，见 4.1/4.5）
+- DO-001: [对象名] — [关键属性与关系的业务描述]
 
-### 6.2 状态机
-- STATE-XXX: [Current State] -> (Triggering Event) -> [Target State]
-- OR: "本需求为纯计算/聚合逻辑，无核心实体状态转换。"
+### 6.2 状态机（业务实体状态；页面 UI 状态见 4.6）
+- STATE-XXX: [当前状态] -> (触发事件) -> [目标状态]
+- 或: "本需求为纯计算/聚合逻辑，无核心实体状态转换。"
 
 ## 7. 业务规则
 - RULE-XXX: [规则名称]
@@ -64,10 +93,11 @@
 ## 9. 边界情况与错误处理
 - ERR-XXX: [场景描述] → [预期处理方式]
 
-## 10. 数据影响与兼容性
+## 10. 数据影响与兼容性（非前端重点；前端关注接口兼容）
 - DATA-XXX: [数据变更描述]
+- DATA-XXX: [Frontend] 接口兼容 —— [新增/改动/废弃的接口、前端版本适配策略]
 
-## 11. 可观测性与发布
+## 11. 可观测性与发布（非前端重点；前端埋点见 4.9）
 - OBS-XXX: [监控指标 / 告警规则 / 灰度策略 / 回滚方案]
 
 ## 12. 验收标准
@@ -98,6 +128,12 @@
 | 前端范围 | FS-XXX | FS-001 |
 | 后端范围 | BS-XXX | BS-001 |
 | 测试范围 | TS-XXX | TS-001 |
+| 文案与多语言 | COPY-XXX | COPY-001 |
+| 单位与本地化 | UNIT-XXX | UNIT-001 |
+| UI 状态 | UIS-XXX | UIS-001 |
+| 端能力与兼容 | CAP-XXX | CAP-001 |
+| 涉及页面 | PAGE-XXX | PAGE-001 |
+| 埋点 | TRACK-XXX | TRACK-001 |
 | 领域对象 | DO-XXX | DO-001 |
 | 状态机 | STATE-XXX | STATE-001 |
 | 业务规则 | RULE-XXX | RULE-001 |
@@ -166,6 +202,8 @@ AC-010: GIVEN 订单状态为"已支付"但库存不足 WHEN 用户点击"确认
 ---
 
 ## 业务规则编写规范
+
+> 本节约束**仅适用于 §7 业务规则**。在 §4.1/§4.4/§4.7 描述前端接口依赖、JSBridge 原生能力时，可以提及接口名、原生能力名（如"调用 NFC 连接接口"），不受此处术语限制。
 
 **允许使用的业务语言：**
 - 用户、角色、权限、账户

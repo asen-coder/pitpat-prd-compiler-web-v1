@@ -1,0 +1,11 @@
+# 运行时生成的缓存目录
+output/*/document/
+output/*/prd_md/
+output/*/.prd-scan-cache.json
+output/*/.prd-scan-cache.json.tmp
+
+# Playwright 运行时文件
+.playwright-mcp/
+
+# 本地配置
+.claude/settings.local.json

@@ -10,12 +10,13 @@ This file contains the complete Phase 1 execution logic. Load this file when the
 2. **Change Type Markers:** Every requirement (OR, RS, NR) tagged with `[NEW]`, `[MOD]`, `[DEL]`, `[OPT]`.
 3. **Priority Markers:** Every goal tagged with `P0` (must-have), `P1` (should-have), `P2` (nice-to-have).
 4. **Three-Perspective Scope Split:** Tag scope with `[Frontend]`, `[Backend]`, `[Testing]`, `[Shared]`.
-5. **No UI Specs:** No layout details, visual design specs, component hierarchies, animation specs, or interaction wireframes.
+5. **No Visual Design (but keep behavior):** Do NOT include visual/layout design, component hierarchies, or animation specs (those live in Figma/Modao). BUT you MUST capture, because frontend depends on them: interaction logic, exact copy (文案), UI states (empty/loading/error/缺省), and unit/i18n display rules. "No UI design" ≠ "no interaction/copy/state/unit".
 6. **Structured Grouping (H4 Mandate):** Use `#### [Category]` headings in Section 2.1. Flat lists prohibited.
 7. **State Machine Notation:** Use `[Current] -> (Trigger) -> [Target]` format.
 8. **Requirement-Implementation Decoupling:** prd.md describes business expectations only, no technical implementation details.
 9. **Verification-Oriented Acceptance Criteria:** AC must include both happy paths AND negative/boundary test paths.
 10. **Zero-Omission:** Do not omit any requirement mentioned in input materials.
+11. **Frontend Capture Completeness:** For pitpat-h5 (Vue3 + Vant + vue-i18n, cross-national multi-language mobile H5), always evaluate and fill these when present in the materials: §4.4 文案与多语言 (i18n), §4.5 单位与本地化展示 (公英制/配速/时区/日期), §4.6 UI 状态覆盖 (空/加载/错误/缺省), §4.7 端能力与兼容 (JSBridge 原生能力、iOS/Android 差异、App 版本兼容), §4.8 涉及页面与路由清单, §4.9 埋点. If a dimension is genuinely not involved, state so explicitly rather than leaving it blank.
 
 ---
 
@@ -83,23 +84,30 @@ When the user provides a URL (e.g., Modao CC, Feishu, Notion, etc.):
 
 Follow the template format and write the file to disk.
 
+**Output location & naming — MUST follow `[Read rules/output-structure.md]`:**
+- Write each requirement's Phase 1 doc as a separate `.md` file into `APP_v<version>/md/`.
+- File name in Simplified Chinese, self-explanatory, no version number (version is the folder).
+- Derive the version folder from the materials' version (e.g., `4.19` → `APP_v4.19.0`); if no version is given, ask the user.
+
 ### Step 2.1: Append Handoff Envelope
 
 After generating prd.md, append the following handoff envelope after Section 13 (the last section):
 
 ```html
 <!-- PRD-HANDOFF-ENVELOPE
-targetDomains: [comma-separated list derived from BS-XXX backend scope analysis, mapped to pitpat-data/ subdirectory names]
-domainObjects: [comma-separated list derived from DO-XXX identifiers]
-keyConstraints: [top 3-5 business rules from RULE-XXX, each summarized in one line]
-scopeSummary: P0=[count] P1=[count] backendScope=[total BS-XXX count]
+targetModules: [comma-separated pitpat-h5 业务域/模块名, mapped from PAGE-XXX and the CLAUDE.md knowledge-graph index, e.g., reports, hardware, ai-coach]
+affectedPages: [comma-separated page/弹窗 from PAGE-XXX]
+nativeCaps: [comma-separated JSBridge/native capabilities from CAP-XXX, e.g., NFC, 蓝牙, 3D]
+i18nImpact: [需新增/改动的 i18n 模块或 key 范围概述]
+keyConstraints: [top 3-5 business/前端 rules from RULE-XXX 与 §4.5 单位规则, each one line]
+scopeSummary: P0=[count] P1=[count] frontendScope=[total FS-XXX count]
 /PRD-HANDOFF-ENVELOPE -->
 ```
 
 **Envelope format notes:**
 - Uses HTML comment markers so it does not render in markdown viewers
 - Phase 2 locates it by searching for `PRD-HANDOFF-ENVELOPE` string
-- `targetDomains` should map BS-XXX items to actual pitpat-data/ package names (e.g., `userservice`, `activityservice`)
+- `targetModules` should map to actual pitpat-h5 domains using the knowledge-graph index in pitpat-h5 `CLAUDE.md` (e.g., `运动报告/reports`, `硬件/hardware`, `AI 教练/ai-coach`)
 - This envelope is a quick-scan index — Phase 2 still reads full prd.md for business context
 
 ---
@@ -107,8 +115,8 @@ scopeSummary: P0=[count] P1=[count] backendScope=[total BS-XXX count]
 ## Phase 1 Execution Constraints
 
 1. **Language:** All generated content MUST be in Simplified Chinese.
-2. **No UI Specs:** Section 4.1 describes functional requirements ONLY. Prohibited: layouts, visual designs, component trees, animation specs, interaction wireframes.
-3. **No Implementation Terms:** Business rules (Section 8) use business language ONLY. Prohibited: Redis, MQ, cache, lock, database sharding, TCC, Saga, or any technical implementation term.
+2. **No Visual Design (but keep behavior):** Prohibited in all sections: layouts, visual designs, component trees, animation specs, interaction wireframes. REQUIRED in §4.1/§4.4–§4.9: interaction logic, exact copy, UI states, unit/i18n display rules, native-capability/platform/version compatibility. Do not let "no UI" delete copy/states/units.
+3. **No Implementation Terms (scope = §7 business rules only):** §7 业务规则 uses business language ONLY (prohibited: Redis, MQ, cache, lock, sharding, TCC, Saga, etc.). This does NOT apply to §4.1/§4.4/§4.7, where frontend interface dependencies and JSBridge native capabilities MAY be named.
 4. **Format Lock:** Do not convert lists to tables, do not append after Section 13 (handoff envelope is the only exception), do not modify H1/H2 headings.
 5. **H4 Mandate:** Section 2.1 MUST use `####` for categorization.
 6. **Sequential Numbering:** All identifiers must be sequential, no gaps.
