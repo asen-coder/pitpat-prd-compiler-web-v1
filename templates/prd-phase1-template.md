@@ -1,0 +1,182 @@
+# Phase 1 输出模板: prd.md
+
+---
+
+## 模板结构
+
+```markdown
+# [Project/Requirement Title]
+
+## 0. 变更影响速览
+- **变更类型:** [新增功能 / 功能调整 / 功能删除 / 性能优化]
+- **影响范围:** [列出受影响的业务域/模块]
+- **核心改动点:** [3-5条要点，每条一行]
+- **数据迁移:** [需要 / 不需要]
+- **预估复杂度:** [低 / 中 / 高]
+
+## 1. 文档元信息
+
+## 2. 需求基线
+### 2.1 原始需求
+#### [Category Module]
+- OR-001: [NEW/MOD/DEL/OPT] [Requirement Description]
+### 2.2 需求补充
+### 2.3 本次迭代新增需求
+### 2.4 冲突与覆盖
+
+## 3. 目标与非目标
+### 3.1 目标
+- G-001: [P0/P1/P2] [Frontend/Backend/Testing/Shared] [Goal Description]
+### 3.2 非目标
+- NG-001: [Explicit boundary: X is specifically excluded because Y]
+
+## 4. 需求范围
+### 4.1 前端范围
+#### 功能需求
+- FS-001: [Frontend] [What data is displayed, what actions are available — NO UI layouts or visual specs]
+
+### 4.2 后端范围
+#### 功能需求
+- BS-001: [Backend] [What business capability is needed — NO implementation details]
+
+### 4.3 测试范围
+#### 测试关注点
+- TS-001: [Testing] [What needs to be verified from a quality perspective]
+
+## 5. 业务流程
+[Mermaid flowchart — functional flow between actors and systems, NOT UI interaction flow]
+
+## 6. 领域模型
+### 6.1 领域对象
+- DO-001: [ObjectName] — [Business description of key attributes and relationships]
+
+### 6.2 状态机
+- STATE-XXX: [Current State] -> (Triggering Event) -> [Target State]
+- OR: "本需求为纯计算/聚合逻辑，无核心实体状态转换。"
+
+## 7. 业务规则
+- RULE-XXX: [规则名称]
+  - 描述: [业务期望 — 使用业务语言，禁止技术实现术语]
+
+## 8. 权限
+- PERM-XXX: [权限描述]
+
+## 9. 边界情况与错误处理
+- ERR-XXX: [场景描述] → [预期处理方式]
+
+## 10. 数据影响与兼容性
+- DATA-XXX: [数据变更描述]
+
+## 11. 可观测性与发布
+- OBS-XXX: [监控指标 / 告警规则 / 灰度策略 / 回滚方案]
+
+## 12. 验收标准
+### 12.1 正向验收
+- AC-XXX: GIVEN [Precondition] WHEN [Action] THEN [Assertion]
+
+### 12.2 边界与异常验收
+- AC-XXX: GIVEN [Boundary/Exception Condition] WHEN [Action] THEN [Expected Behavior]
+
+## 13. 待解决问题
+- OQ-XXX: (Blocker/Minor) [Question — 不可自行推断答案]
+```
+
+---
+
+## 编号连续性要求
+
+所有标识符必须按顺序编号，**无间隙**：
+
+| 类型 | 前缀格式 | 示例 |
+|------|---------|------|
+| 原始需求 | OR-XXX | OR-001, OR-002, OR-003 |
+| 补充需求 | RS-XXX | RS-001, RS-002 |
+| 新增需求 | NR-XXX | NR-001 |
+| 冲突覆盖 | CO-XXX | CO-001 |
+| 目标 | G-XXX | G-001, G-002 |
+| 非目标 | NG-XXX | NG-001 |
+| 前端范围 | FS-XXX | FS-001 |
+| 后端范围 | BS-XXX | BS-001 |
+| 测试范围 | TS-XXX | TS-001 |
+| 领域对象 | DO-XXX | DO-001 |
+| 状态机 | STATE-XXX | STATE-001 |
+| 业务规则 | RULE-XXX | RULE-001 |
+| 权限 | PERM-XXX | PERM-001 |
+| 错误处理 | ERR-XXX | ERR-001 |
+| 数据影响 | DATA-XXX | DATA-001 |
+| 可观测性 | OBS-XXX | OBS-001 |
+| 正向验收 | AC-XXX | AC-001 |
+| 边界验收 | AC-XXX | AC-010 |
+| 待解决问题 | OQ-XXX | OQ-001 |
+
+---
+
+## 变更类型标记说明
+
+| 标记 | 含义 | 使用场景 |
+|------|------|---------|
+| `[NEW]` | 新增 | 全新的功能或模块 |
+| `[MOD]` | 修改 | 对现有功能的变更 |
+| `[DEL]` | 删除 | 移除的功能 |
+| `[OPT]` | 优化 | 性能优化、无行为变更 |
+
+---
+
+## 优先级标记说明
+
+| 标记 | 含义 | 说明 |
+|------|------|------|
+| `P0` | 必须有 | 核心业务功能，上线前必须完成 |
+| `P1` | 应该有 | 重要功能，发布会上线后补全 |
+| `P2` | 最好有 | 增强功能，不影响业务核心 |
+
+---
+
+## 状态机格式说明
+
+**标准格式：**
+```
+STATE-001: [当前状态] -> (触发事件) -> [目标状态]
+```
+
+**示例：**
+```
+STATE-001: [待支付] -> (用户付款) -> [已支付]
+STATE-002: [已支付] -> (超时未发货) -> [已取消]
+```
+
+**无状态机时的表示：**
+如果需求为纯计算/聚合逻辑，在 6.2 节中明确说明：
+> 本需求为纯计算/聚合逻辑，无核心实体状态转换。
+
+---
+
+## 验收标准格式说明
+
+**正向验收（GIVEN-WHEN-THEN）：**
+```
+AC-001: GIVEN 用户已登录且有权限 WHEN 用户点击"确认发货"按钮 THEN 系统更新订单状态为"已发货"并发送通知
+```
+
+**边界与异常验收：**
+```
+AC-010: GIVEN 订单状态为"已支付"但库存不足 WHEN 用户点击"确认发货" THEN 系统提示"库存不足，发货失败"且订单状态保持不变
+```
+
+---
+
+## 业务规则编写规范
+
+**允许使用的业务语言：**
+- 用户、角色、权限、账户
+- 订单、商品、库存、金额
+- 状态、流程、审核、审批
+- 奖励、积分、等级、称号
+
+**禁止使用的技术术语：**
+- Redis、MQ、缓存、消息队列
+- 数据库、表、字段、索引
+- 分库分表、读写分离
+- TCC、Saga、分布式事务
+- 锁、乐观锁、悲观锁
+- API、RPC、HTTP、TCP
