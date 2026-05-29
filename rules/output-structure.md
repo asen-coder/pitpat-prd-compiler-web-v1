@@ -25,15 +25,15 @@ APP_v<MAJOR>.<MINOR>.<PATCH>
 ## 3. `document/` — Phase 2 技术文档
 
 - 存放 **Phase 2** 生成的技术实现文档（描述 How：结合 pitpat-h5 `CLAUDE.md` 前端工程规范 + 源码扫描结果映射到 pitpat-h5 架构）。
-- **每个需求一个独立 `.md` 文件**，与 `document/` 中的同名需求一一对应。
-- 生成方式：先按 `templates/prd-phase2-template.md` 产出 Markdown
+- **每个需求一个独立 `.md` 文件**，与 `prd_md/` 中的需求一一对应（文件名 = prd_md 同名 + `方案设计` 后缀）。
+- 生成方式：按 `templates/prd-phase2-template.md` 产出 Markdown，直接存放为 `.md` 文件
 
 
 ## 4. 文件命名（中文，见名知义）
 
 - 文件名使用**简体中文**，准确概括该需求，让人一眼明白是什么需求。
 - **禁止**英文 kebab-case；**禁止**在文件名中写版本号（版本已体现在目录层级）。
-- `prd_md/` 与对应 `document/` 文件**同名**（仅扩展名不同）。
+- `prd_md/` 文件名与 `document/` 文件名一一对应，`document/` 文件名 = prd_md 同名 + `方案设计` 后缀（如 `积分签到.md` → `积分签到方案设计.md`）。
 - 命名以「核心需求名（可选括号补充关键子项）」为准，简洁优先。
 - 示例：
   - `prd_md/积分签到（每日签到与补签卡）.md`

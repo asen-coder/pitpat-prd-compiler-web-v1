@@ -18,17 +18,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - 工作流详情：`phases/phase1.md`
 - 输出模板：`templates/prd-phase1-template.md`
-- 输出位置与命名：遵循 `rules/output-structure.md`（版本目录 `APP_v<版本>/md/`，中文文件名，每需求一份）
+- 输出位置与命名：遵循 `rules/output-structure.md`（版本目录 `APP_v<版本>/prd_md/`，中文文件名，每需求一份）
 
 Phase 1 结束时，必须在 Section 13 之后追加 Handoff Envelope（HTML 注释块），供 Phase 2 快速定位目标模块。
 
-### Phase 2 → 生成前端技术文档（`.docx`）
+### Phase 2 → 生成前端技术文档（`.md`）
 
 从 `prd.md` 生成**前端实现映射文档**（描述 How，映射到 pitpat-h5 架构：Vue3 + Vant + Vuex + vue-i18n + Axios + Stylus）。
 
 - 工作流详情：`phases/phase2.md`
 - 输出模板：`templates/prd-phase2-template.md`
-- 输出位置与命名：遵循 `rules/output-structure.md`（`APP_v<版本>/docx/`，与 `md/` 同名，每需求一份）
+- 输出位置与命名：遵循 `rules/output-structure.md`（`APP_v<版本>/document/`，文件名 = prd_md 同名 + `方案设计`，每需求一份）
 
 Phase 2 必须先读取 **pitpat-h5 的 `CLAUDE.md`**（前端工程约定来源），再用 CodeGraph 扫描 pitpat-h5 代码库，最后生成文档并追加前端架构风险清单（Section 12）。
 
@@ -75,5 +75,5 @@ templates/
   prd-phase1-template.md        # 业务需求文档输出结构和编号规范（含 §4.4–§4.9 前端维度）
   prd-phase2-template.md        # 前端技术方案输出结构（工程约定引用 pitpat-h5 CLAUDE.md）
 rules/
-  output-structure.md           # 输出目录与文件命名唯一事实源（APP_v<版本>/md + docx，中文名）
+  output-structure.md           # 输出目录与文件命名唯一事实源（APP_v<版本>/prd_md + document，中文名）
 ```

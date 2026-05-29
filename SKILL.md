@@ -7,7 +7,7 @@ description: Two-phase PRD compiler for the pitpat-h5 frontend. Phase 1 compiles
 
 **Objective:** Transform unstructured PRD materials into two structured documents:
 1. Phase 1 `.md` — Business requirements document (focus: What, not How), frontend-aware (i18n / 公英制 / UI states / 端能力)
-2. Phase 2 `.docx` — Frontend implementation mapping (focus: How, using the pitpat-h5 architecture)
+2. Phase 2 `.md` — Frontend implementation mapping (focus: How, using the pitpat-h5 architecture)
 
 **Progressive Disclosure — load phase instructions on demand:**
 
@@ -24,6 +24,6 @@ description: Two-phase PRD compiler for the pitpat-h5 frontend. Phase 1 compiles
 
 In short:
 - Every compilation creates a version folder `APP_v<MAJOR>.<MINOR>.<PATCH>` (e.g., `4.19` → `APP_v4.19.0`).
-- Inside it: `md/` holds Phase 1 raw requirement docs (`.md`, one file per requirement); `docx/` holds Phase 2 technical docs (`.docx`, one file per requirement, same name as its `md/` counterpart).
+- Inside it: `prd_md/` holds Phase 1 raw requirement docs (`.md`, one file per requirement); `document/` holds Phase 2 technical docs (`.md`, one file per requirement, file name = prd_md counterpart + `方案设计` suffix).
 - File names are in **Simplified Chinese**, self-explanatory at a glance, with no version number in the name.
-- Each file keeps a top declaration: `📁 **File: APP_v<version>/md/<中文需求名>.md**` (or `docx/...docx`).
+- Each file keeps a top declaration: `📁 **File: APP_v<version>/prd_md/<中文需求名>.md**` (or `document/<中文需求名>方案设计.md`).

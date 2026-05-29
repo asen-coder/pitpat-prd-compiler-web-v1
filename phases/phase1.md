@@ -85,7 +85,7 @@ When the user provides a URL (e.g., Modao CC, Feishu, Notion, etc.):
 Follow the template format and write the file to disk.
 
 **Output location & naming — MUST follow `[Read rules/output-structure.md]`:**
-- Write each requirement's Phase 1 doc as a separate `.md` file into `APP_v<version>/md/`.
+- Write each requirement's Phase 1 doc as a separate `.md` file into `APP_v<version>/prd_md/`.
 - File name in Simplified Chinese, self-explanatory, no version number (version is the folder).
 - Derive the version folder from the materials' version (e.g., `4.19` → `APP_v4.19.0`); if no version is given, ask the user.
 

@@ -118,7 +118,7 @@ After a full scan, write results to `{prd-directory}/.prd-scan-cache.json`:
 [Read templates/prd-phase2-template.md for complete template structure]
 ```
 
-Follow the template format. Per `rules/output-structure.md`, the final artifact is a `.docx` in `APP_v<version>/docx/`, same Chinese name as its `md/` counterpart.
+Follow the template format. Per `rules/output-structure.md`, the final artifact is a `.md` file in `APP_v<version>/document/`, file name = prd_md counterpart + `方案设计` suffix.
 
 **Silent quality boost — apply scan findings (or cached data) to template sections:**
 
@@ -187,4 +187,4 @@ If no risks are found:
 5. **Codebase Scan:** MUST perform Step 3.2 (lightweight) and Step 3.3 (deep targeted) before generating, unless a valid scan cache exists. Use CodeGraph first.
 6. **Guardrail Output:** MUST append the frontend architecture risk checklist (Section 12) after Step 5.
 7. **Reuse & Pattern Alignment:** All designs MUST align with patterns discovered in Step 3.3 (existing api methods, store fields, util/hook names, i18n key style, component style), and prefer reuse over new code.
-8. **Output:** Final artifact per `rules/output-structure.md` — `.docx` in `APP_v<version>/docx/`, one per requirement, named identically to its `md/` counterpart.
+8. **Output:** Final artifact per `rules/output-structure.md` — `.md` in `APP_v<version>/document/`, one per requirement, file name = prd_md counterpart + `方案设计` suffix.

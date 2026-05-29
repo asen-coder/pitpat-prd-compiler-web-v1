@@ -1,8 +1,5 @@
 # 运行时生成的缓存目录
-output/*/document/
-output/*/prd_md/
-output/*/.prd-scan-cache.json
-output/*/.prd-scan-cache.json.tmp
+output/*
 
 # Playwright 运行时文件
 .playwright-mcp/
